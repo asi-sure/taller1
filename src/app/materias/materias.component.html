@@ -1,0 +1,20 @@
+<div>
+    <form [formGroup]="regForm" (ngSubmit)="enviarDatos()">
+        <label for="sigla">Sigla::</label>
+        <input type="text" formControlName="sigla" class="form-control" [ngClass]="{'is-invalid': xenviado && f.sigla.errors}">
+        <div *ngIf="xenviado && f.sigla.errors" class="invalid-feedback">
+            <div *ngIf="f.sigla.errors.required"> Debe ingresar un dato. </div>
+            <div *ngIf="f.sigla.errors.minlength"> Mínimo debe ingresar 3 Char. </div>
+            <div *ngIf="f.sigla.errors.maxlength"> Máximo debe ingresar 6 Char. </div>
+        </div>
+
+        <label for="nombre">Email::</label>
+        <input type="text" formControlName="nombre" class="form-control" [ngClass]="{'is-invalid': xenviado && f.nombre.errors}">
+        <div *ngIf="xenviado && f.nombre.errors" class="invalid-feedback">
+            <div *ngIf="f.nombre.errors.required"> Debe ingresar un NOMBRE. </div>
+            <div *ngIf="f.nombre.errors.email"> NO es correo válido. </div>
+        </div>
+
+        <button>Registrar</button>
+    </form>
+</div>

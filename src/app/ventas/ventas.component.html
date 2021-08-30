@@ -1,0 +1,14 @@
+<h1>CONSUMIENDO DATOS DE INTERNET (FREE API - SIN CLAVE)</h1>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>titulo</th>
+        <th>Estado</th>
+    </tr>
+    <tr *ngFor="let reg of datos">
+        <td>{{reg.id}}</td>
+        <td>{{reg.title}}</td>
+        <td>{{reg.completed}}</td>
+    </tr>
+</table>

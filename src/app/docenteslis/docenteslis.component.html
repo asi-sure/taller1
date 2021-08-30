@@ -1,0 +1,46 @@
+
+<H1>LISTA DE Docentes</H1>
+
+<a class="nav-link" routerLink="/docen" routerLinkActive="active">
+    <img src="assets/images/add.png" alt="">
+</a>
+
+    <TABLe class="table">
+        <THEad class="thead-light">
+            <TR>
+                <th>CEDULA</th>
+                <TH>DOCENTES</TH>
+                <th>Eliminar</th>
+                <th>Modificar</th>
+            </TR>
+        </THEad>
+        <tbody *ngFor="let reg of docentes2 ; index as con">
+            <tr>
+                <td> {{reg.ci}}</td>
+                <td>{{reg.nombre}}  {{reg.ap}} {{reg.am}}</td>
+                <td>
+                    <a href="javascript:void(0)" (click)="llamarDel(con)">
+                        <img src="assets/images/del.png" alt="">
+                    </a>
+                </td>
+                <td>
+                    <a href="javascript:void(0)" (click)="llamarMod(reg.ci,reg.nombre,reg.ap,reg.am,con)">
+                        <img src="assets/images/mod.png" alt="">
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </TABLe>
+
+    <div *ngIf="ocultar">
+        <h1>MODIFICAR DATOS</h1>
+        <p> <span>CI:</span>
+            <input type="text" [(ngModel)]="docentes.ci"> </p>
+        <p> <span>Nombre:</span>
+          <input type="text" [(ngModel)]="docentes.nombre"> </p>
+        <p> <span>AP:</span>
+            <input type="text" [(ngModel)]="docentes.ap">  </p>
+        <p> <span>AM:</span>
+            <input type="text" [(ngModel)]="docentes.am"> </p>  
+        <p> <button (click)="modDatosDocentes()">Modificar Datos</button> </p>
+    </div>

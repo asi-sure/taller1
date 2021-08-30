@@ -1,0 +1,168 @@
+<div id="todo">
+
+
+    <div id="aaa">
+    <div class="container">
+        <h1>{{title}}</h1>
+      
+    <a href="javascript:void(0)" (click)="llamaModalAdd(contentAdd)"  class="float-right" >
+      <img src="./assets/images/add.png" alt="none">
+      </a>
+      <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">CODPRO</th>
+          <th scope="col">NOMBRE</th>
+          <th scope="col">ESTADO</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Del</th>
+          <th scope="col">Mod</th>
+          <th scope="col">Del.Log</th>
+        </tr>
+      </thead>
+      <tbody  *ngFor="let pro of apiProfesion; index as con">
+        <tr>
+          <th scope="row">{{con + 1}}</th>
+          <td>{{pro.codpro}}</td>
+          <td>{{pro.nombre}}</td>
+          <td>{{pro.estado}}</td>
+          <td>
+            <p *ngIf="pro.estado==1; else siCero">
+              <img src="./assets/images/handup.png" width="25" height="30" alt="none">            
+            </p>
+            <ng-template #siCero>
+              <img src="./assets/images/handdown.png" width="25" height="30" alt="none">
+            </ng-template>
+          </td>
+          <td>
+            <a href="javascript:void(0)" (click)="llamaModalDel(contentDel,pro.codpro, pro.nombre, pro.estado)">
+                <img src="./assets/images/del.png" alt="none"> 
+            </a>
+          </td>
+          <td>
+              <a href="javascript:void(0)" (click)="llamaModalMod(contentMod, pro.codpro, pro.nombre, pro.estado)">
+                  <img src="./assets/images/mod.png" alt="none">
+              </a>
+          </td>
+          <td>
+            <a href="javascript:void(0)" (click)="eliminacionLogica(pro.codpro, pro.nombre, pro.estado)">
+              <img src="./assets/images/reload.png" width="25" height="25" alt="none">
+            </a>
+        </td>
+        </tr>
+      </tbody>
+      </table>
+      </div>
+    </div>
+     
+    
+    </div>
+    <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+    
+    
+  <!--VENTANA MODAL PARA ADICIONAR DATOS  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  -->
+  <ng-template #contentAdd let-c="close" let-d="dismiss" id="modal-add" >
+    <div class="modal-header" >
+      <h4 class="modal-title" id="modal-basic-title">ADICIONAR DATOS PROFESION</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>  
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
+        <div class="modal-body" >          
+              <div class="form-group">
+                  <label>CODPRO</label>
+                  <input type="text" formControlName="codpro" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.codpro.errors }" />
+                  <div *ngIf="submitted && f.codpro.errors" class="invalid-feedback">
+                      <p *ngIf="f.codpro.errors.required">requiere de CODPRO</p>
+                      <p *ngIf="f.codpro.errors.minlength">Mínimo 5 char</p>
+                      <p *ngIf="f.codpro.errors.maxlength">Máximo 6 char</p>
+                  </div>
+              </div> 
+              <div class="form-group">
+                <label>NOMBRE</label>
+                <input type="text" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nombre.errors }" />
+                <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
+                    <p *ngIf="f.nombre.errors.required">requiere NOMBRE</p> 
+                    <p *ngIf="f.nombre.errors.minlength">Mínimo 3 char</p>
+                    <p *ngIf="f.nombre.errors.maxlength">Máximo 15 char</p>              
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label>ESTADO</label>
+                <input type="text" formControlName="estado" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.estado.errors }" />
+                <div *ngIf="submitted && f.estado.errors" class="invalid-feedback">
+                    <p *ngIf="f.estado.errors.required">requiere ESTADO</p>
+                    <p *ngIf="f.estado.errors.minlength">Mínimo 1 char</p>
+                    <p *ngIf="f.estado.errors.maxlength">Máximo 1 char</p>              
+                </div>
+              </div>
+        </div>      
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="c('Save click')" >Cancel</button>
+          <button type="submit" class="btn btn-primary" >Guardar</button>
+        </div>
+      </form> 
+    </ng-template>
+
+   <!-- VENTANA MODAL PARA MODIFICAR DATOS xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  -->
+  <ng-template #contentMod let-c="close" let-d="dismiss" class="modal"  >
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">MODIFICAR DATOS PROFESION</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="registerForm2" (ngSubmit)="onSubmit2()">
+        <div class="modal-body">      
+            <div class="form-group">
+                <label>CODPRO</label>
+                <input type="text" formControlName="codpro" class="form-control" [ngClass]="{ 'is-invalid': submitted && f2.codpro.errors }" />
+                <div *ngIf="submitted && f2.codpro.errors" class="invalid-feedback">
+                    <p *ngIf="f2.codpro.errors.required">requiere de CODPRO</p>
+                    <p *ngIf="f2.codpro.errors.minlength">Mínimo 5 char</p>
+                    <p *ngIf="f2.codpro.errors.maxlength">Máximo 1 char</p>
+                </div>
+            </div>   
+            <div class="form-group">
+              <label>NOMBRE</label>
+              <input type="text" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': submitted && f2.nombre.errors }" />
+              <div *ngIf="submitted && f2.nombre.errors" class="invalid-feedback">
+                  <p *ngIf="f2.nombre.errors.required">requiere NOMBRE</p>
+                  <p *ngIf="f2.nombre.errors.minlength">Mínimo 3 char</p>
+                  <p *ngIf="f2.nombre.errors.maxlength">Máximo 15 char</p>              
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>ESTADO</label>
+              <input type="text" formControlName="estado" class="form-control" [ngClass]="{ 'is-invalid': submitted && f2.estado.errors }" />
+              <div *ngIf="submitted && f2.estado.errors" class="invalid-feedback">
+                  <p *ngIf="f2.estado.errors.required">requiere ESTADO</p>
+                  <p *ngIf="f2.estado.errors.minlength">Mínimo 1 char</p>
+                  <p *ngIf="f2.estado.errors.maxlength">Máximo 1 char</p>              
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Cancel</button>
+          <button type="submit" class="btn btn-primary" >Modificar</button>
+        </div>
+    </form>  
+  </ng-template> 
+
+  <!-- VENTANA MODAL PARA OPCION ELIMINAR xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  -->
+  <ng-template #contentDel let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">SEGURO DE ELIMINAR A:</h4>
+    </div>
+    <div class="modal-body">
+       <h4 style="color:blue">{{ alumnoDat }}</h4>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Cancel</button>
+        <button type="submit" class="btn btn-primary" (click)="eliminar()" >Eliminar Ahora</button>
+    </div>
+  </ng-template>
