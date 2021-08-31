@@ -14,7 +14,7 @@ import {debounceTime} from 'rxjs/operators'; // para mensaje
   styleUrls: ['./estudiantes.component.css']
 })
 export class EstudiantesComponent implements OnInit {
-  title = 'LISTA DE ALUMNOS';
+  title = 'LISTA DE ALUMNOS - Con arrays';
   registerForm: FormGroup;
   registerForm2: FormGroup;
   submitted = false;

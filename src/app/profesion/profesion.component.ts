@@ -16,7 +16,7 @@ import {  Router  } from '@angular/router';
   styleUrls: ['./profesion.component.css']
 })
 export class ProfesionComponent implements OnInit {
-  title = 'LISTA DE PROFESIONES ';
+  title = 'LISTA DE PROFESIONES (consume API) ';
   registerForm: FormGroup;
   registerForm2: FormGroup;
   submitted = false;
