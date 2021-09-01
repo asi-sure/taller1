@@ -7,6 +7,7 @@ import { DocentesComponent }  from './docentes/docentes.component';
 import { DocenteslisComponent } from './docenteslis/docenteslis.component';
 import { EstudiantesComponent } from './estudiantes/estudiantes.component';
 import { ProfesionComponent } from './profesion/profesion.component';
+import { UsersComponent } from './users/users.component';
 
 const routes : Routes = [
   {path: 'cur', component: CursosComponent },
@@ -16,6 +17,7 @@ const routes : Routes = [
   {path: 'docenlis', component: DocenteslisComponent },
   {path: 'estud', component: EstudiantesComponent },
   {path: 'profe', component: ProfesionComponent },
+  {path: 'users', component: UsersComponent },
   {path: '',  component: MateriasComponent },
   { path: 'ven', loadChildren: () => import('./ventas/ventas.module').then(m => m.VentasModule) },
   { path: 'con', loadChildren: () => import('./contabilidad/contabilidad.module').then(m => m.ContabilidadModule) },

@@ -1,0 +1,40 @@
+<p>LISTA DE USUARIO</p>
+<DIV *ngFor="let xuser of users; index as con">
+--{{xuser.username}} -<br>
+--{{xuser.password}} -<br>
+--informacion::<br>
+-----{{xuser.informacion.ci}} -<br>
+-----{{xuser.informacion.nombre}} -<br>
+-----{{xuser.informacion.ap}} -<br>
+-----{{xuser.informacion.am}} -<br>
+--direc::<br>
+----------{{xuser.informacion.direc.zona}} -<br>
+----------{{xuser.informacion.direc.calle}} -<br>
+--files::<br>
+----------{{xuser.informacion.files.nombre}} -<br>
+----------{{xuser.informacion.files.path}} -<br>
+--roles::<br>
+-----{{xuser.roles.rolname}} -<br>
+
+</DIV>
+<!--
+"username" : "ABC",
+"password" : "12345",
+"informacion" : {
+  "ci" : "111",
+  "nombre" : "JOSE MANUEL",
+  "ap" : "PERALTA",
+  "am" : "MENDEZ",
+  "direc"  : {
+    "zona" : "SAN GERONIMO",
+    "calle" : "FORTIN CAMPERO"
+  },
+  "files" : {
+    "nombre" : "josemanuel_abc.png",
+    "path" : "/assets/misfiles/"
+  }  
+},
+"roles" : {
+"rolname" : "ADMINISTRADOR"
+}
+-->

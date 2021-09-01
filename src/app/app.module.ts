@@ -20,6 +20,7 @@ import { EstudiantesComponent } from './estudiantes/estudiantes.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProfesionComponent } from './profesion/profesion.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ProfesionComponent } from './profesion/profesion.component';
     DocentesComponent,
     DocenteslisComponent,
     EstudiantesComponent,
-    ProfesionComponent
+    ProfesionComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
